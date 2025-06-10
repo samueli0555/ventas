@@ -7,12 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Categoria extends Model
 {
-    protected $table='categoria';
-    //
-    public $timestamps=false;
     protected $fillable = [
         'nombre',
-        'identificador',
+        'descripcion',
         'fecha_registro',
         'actualizar_registro'
     ];
@@ -21,4 +18,4 @@ class Categoria extends Model
     {
         return $this->hasMany(Producto::class);
     }
-}
+} 

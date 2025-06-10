@@ -19,7 +19,7 @@ class CategoriaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * muestra la listado de cstegorias
      */
     public function create()
     {
@@ -27,32 +27,23 @@ class CategoriaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * muestra el formulario para crear nueva categoria
      */
     public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'descripcion' => 'nullable|string|max:255',
-            'identificador' => 'nullable|string|max:255',
+            'descripcion' => 'nullable|string'
         ]);
-    
-        $data = $request->all();
-    
-        // Si no mandaron 'identificador', lo generamos automáticamente
-        if (empty($data['identificador'])) {
-            $data['identificador'] = uniqid('cat-'); // genera algo como 'cat-662f1b5b5c9f2'
-        }
-    
-        Categoria::create($data);
-    
+
+        Categoria::create($request->all());
+
         return redirect()->route('categorias.index')
             ->with('success', 'Categoría creada exitosamente');
     }
-    
 
     /**
-     * Display the specified resource.
+     * muestra la informacion de una categoria especifico
      */
     public function show(Categoria $categoria)
     {
@@ -62,7 +53,7 @@ class CategoriaController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * muetsra el formulario para editar una categoria
      */
     public function edit(Categoria $categoria)
     {
@@ -96,5 +87,11 @@ class CategoriaController extends Controller
 
         return redirect()->route('categorias.index')
             ->with('success', 'Categoría eliminada exitosamente');
+    }
+
+    //devuelve todas las categorias con sus producto con sus productos asociados (API)
+    public function categoriaConproducto(){
+        $categoria=\App\Models\Categoria::with('productos')->get();
+        return response()->json($categoria);
     }
 }

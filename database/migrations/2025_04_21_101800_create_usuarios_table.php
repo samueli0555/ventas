@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('productos', function (Blueprint $table) {
+        Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('identificador')->unique();
-            $table->text('descripcion');
-            $table->decimal('precio', 10, 2);
-            $table->integer('stock');
-            $table->foreignId('categoria_id')->constrained('categorias');
-            $table->boolean('estado')->default(true);
+            $table->string('usuario')->unique();
+            $table->string('email')->unique();
+            $table->string('contraseña');
             $table->timestamp('fecha_registro')->useCurrent();
             $table->timestamp('actualizar_registro')->useCurrentOnUpdate()->nullable();
+            $table->timestamps();
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('productos');
+        Schema::dropIfExists('usuarios');
     }
 };

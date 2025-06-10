@@ -20,11 +20,12 @@ return new class extends Migration
             $table->timestamp('actualizar_registro')->useCurrentOnUpdate()->nullable();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('venta');
+        Schema::dropIfExists('ventas');
     }
 };

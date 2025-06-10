@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detalle_venta', function (Blueprint $table) {
+        Schema::create('detalle_ventas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('venta_id')->constrained('ventas')->onDelete('cascade');
             $table->foreignId('producto_id')->constrained('productos');
@@ -23,11 +23,12 @@ return new class extends Migration
             $table->timestamp('actualizar_registro')->useCurrentOnUpdate()->nullable();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('detalle_venta');
+        Schema::dropIfExists('detalle_ventas');
     }
 };

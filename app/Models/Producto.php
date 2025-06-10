@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Producto extends Model
 {
-    //
-    protected $table='productos';
-    //
-    public $timestamps=false;
-    
     protected $fillable = [
         'nombre',
         'identificador',
@@ -19,9 +14,7 @@ class Producto extends Model
         'precio',
         'stock',
         'categoria_id',
-        'estado',
-        'fecha_registro',
-        'actualizar_registro'
+        'estado'
     ];
 
     public function categoria(): BelongsTo
